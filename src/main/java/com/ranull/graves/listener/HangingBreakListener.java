@@ -16,6 +16,9 @@ public class HangingBreakListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onHangingBreak(HangingBreakEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
         event.setCancelled(event.getEntity() instanceof ItemFrame && plugin.getEntityDataManager()
                 .getGrave(event.getEntity()) != null);
     }

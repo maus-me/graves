@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 
 public final class ReflectionUtil {
     public static void swingMainHand(Player player) {
@@ -24,5 +25,22 @@ public final class ReflectionUtil {
     public static Class<?> getClass(String clazz) throws ClassNotFoundException {
         return Class.forName("net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName()
                 .replace(".", ",").split(",")[3] + "." + clazz);
+    }
+
+    // from sk89q.ReflectionUtil
+    public static <T> T getField(Object from, String name) {
+        Class checkClass = from.getClass();
+
+        while(true) {
+            try {
+                Field field = checkClass.getDeclaredField(name);
+                field.setAccessible(true);
+                return (T)field.get(from);
+            } catch (IllegalAccessException | NoSuchFieldException var4) {
+                if (checkClass.getSuperclass() == Object.class || (checkClass = checkClass.getSuperclass()) == null) {
+                    return null;
+                }
+            }
+        }
     }
 }

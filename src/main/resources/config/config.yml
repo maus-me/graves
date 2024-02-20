@@ -74,8 +74,6 @@ settings:
       enabled: true # Should WorldGuard integration be enabled.
     towny: # https://www.spigotmc.org/resources/towny-advanced.72694/
       enabled: true # Should Towny integration be enabled.
-    griefdefender: # https://www.spigotmc.org/resources/griefdefender.68900/
-      enabled: true # Should GriefDefender integration be enabled.
     furniturelib: # https://www.spigotmc.org/resources/furniturelibary.9368/
       enabled: true # Should FurnitureLib integration be enabled.
     furnitureengine: # https://www.spigotmc.org/resources/furnitureengine.97134/
@@ -85,9 +83,6 @@ settings:
     itemsadder: # https://www.spigotmc.org/resources/itemsadder.73355/
       enabled: true # Should ItemsAdder integration be enabled.
       write: true # Should Graves write its data into the ItemsAdder data folder.
-    oraxen: # https://www.spigotmc.org/resources/oraxen.72448/
-      enabled: true # Should Oraxen integration be enabled.
-      write: true # Should Graves write its pack into the Oraxen pack folder.
     placeholderapi: # https://www.spigotmc.org/resources/placeholderapi.6245/
       enabled: true # Should PlaceholderAPI integration be enabled.
     skript: # https://github.com/SkriptLang/Skript/

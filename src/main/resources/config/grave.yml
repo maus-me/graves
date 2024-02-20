@@ -310,18 +310,6 @@ settings:
           enabled: false # Should we use ItemsAdder blocks?
           name: "itemsadder:nice_stone" # Block name.
 
-      ##########
-      # Oraxen #
-      ##########
-      # The option requires Oraxen, you must have this installed to use models.
-      # Graves automatically adds models into Oraxen, if you want to use it you will need to re-generate your pack and use "grave" as the furniture name.
-      oraxen:
-        furniture:
-          enabled: false # Should we use Oraxen furniture?
-          name: "grave" # Block name.
-        block:
-          enabled: false # Should we use Oraxen blocks?
-          name: "caveblock" # Block name.
 
       #############
       # PlayerNPC #

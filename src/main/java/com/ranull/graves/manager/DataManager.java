@@ -52,9 +52,9 @@ public final class DataManager {
                 loadEntityDataMap("itemsadder", EntityData.Type.ITEMSADDER);
             }
 
-            if (plugin.getIntegrationManager().hasOraxen()) {
-                loadEntityDataMap("oraxen", EntityData.Type.ORAXEN);
-            }
+//            if (plugin.getIntegrationManager().hasOraxen()) {
+//                loadEntityDataMap("oraxen", EntityData.Type.ORAXEN);
+//            }
 
             if (plugin.getIntegrationManager().hasPlayerNPC()) {
                 loadEntityDataMap("playernpc", EntityData.Type.PLAYERNPC);
@@ -82,9 +82,9 @@ public final class DataManager {
             setupEntityTable("itemsadder");
         }
 
-        if (plugin.getIntegrationManager().hasOraxen()) {
-            setupEntityTable("oraxen");
-        }
+//        if (plugin.getIntegrationManager().hasOraxen()) {
+//            setupEntityTable("oraxen");
+//        }
 
         if (plugin.getIntegrationManager().hasPlayerNPC()) {
             setupEntityTable("playernpc");

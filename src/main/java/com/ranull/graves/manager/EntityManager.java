@@ -210,9 +210,7 @@ public final class EntityManager extends EntityDataManager {
 
     public boolean canTeleport(Entity entity, Location location) {
         return (!plugin.getIntegrationManager().hasWorldGuard()
-                || plugin.getIntegrationManager().getWorldGuard().canTeleport(entity, location))
-                && (!plugin.getIntegrationManager().hasGriefDefender()
-                || plugin.getIntegrationManager().getGriefDefender().canTeleport(entity, location));
+                || plugin.getIntegrationManager().getWorldGuard().canTeleport(entity, location));
     }
 
     public void playWorldSound(String string, Player player) {
@@ -320,11 +318,10 @@ public final class EntityManager extends EntityDataManager {
             String prefix = plugin.getConfig("message.prefix", entity.getType(), permissionList)
                     .getString("message.prefix");
 
-            if (prefix != null && !prefix.equals("")) {
-                string = prefix + string;
-            }
-
             if (string != null && !string.equals("")) {
+                if (prefix != null && !prefix.equals("")) {
+                    string = prefix + string;
+                }
                 player.sendMessage(StringUtil.parseString(string, entity, name, location, grave, plugin));
             }
         }
@@ -425,7 +422,7 @@ public final class EntityManager extends EntityDataManager {
                     Location location = plugin.getGraveManager().getGraveLocation(entity.getLocation(), grave);
 
                     if (location != null) {
-                        if (entity.getLocation().distance(location) <= distance) {
+                        if ((entity.getWorld() == location.getWorld()) && (entity.getLocation().distance(location) <= distance)) {
                             plugin.getGraveManager().openGrave(entity, entity.getLocation(), grave);
                         } else {
                             plugin.getEntityManager().sendMessage("message.distance-virtual", entity, location, grave);

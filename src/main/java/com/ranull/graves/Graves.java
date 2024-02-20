@@ -10,8 +10,6 @@ import com.ranull.graves.listener.*;
 import com.ranull.graves.manager.*;
 import com.ranull.graves.type.Grave;
 import com.ranull.graves.util.*;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SingleLineChart;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -77,7 +75,6 @@ public class Graves extends JavaPlugin {
         graveManager = new GraveManager(this);
         graveyardManager = new GraveyardManager(this);
 
-        registerMetrics();
         registerCommands();
         registerListeners();
         registerRecipes();
@@ -163,17 +160,6 @@ public class Graves extends JavaPlugin {
                         + "/furniturelib.txt", this);
             }
         }
-    }
-
-    private void registerMetrics() {
-        Metrics metrics = new Metrics(this, getMetricsID());
-
-        metrics.addCustomChart(new SingleLineChart("graves", new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return cacheManager.getGraveMap().size();
-            }
-        }));
     }
 
     public void registerListeners() {

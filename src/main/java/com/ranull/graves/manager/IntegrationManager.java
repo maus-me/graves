@@ -15,12 +15,10 @@ public final class IntegrationManager {
     private WorldEdit worldEdit;
     private WorldGuard worldGuard;
     private Towny towny;
-    private GriefDefender griefDefender;
     private FurnitureLib furnitureLib;
     private FurnitureEngine furnitureEngine;
     private ProtectionLib protectionLib;
     private ItemsAdder itemsAdder;
-    private Oraxen oraxen;
     private ChestSort chestSort;
     private MiniMessage miniMessage;
     private MineDown mineDown;
@@ -49,7 +47,6 @@ public final class IntegrationManager {
         loadFurnitureEngine();
         loadProtectionLib();
         loadItemsAdder();
-        loadOraxen();
         loadMiniMessage();
         loadMineDown();
         loadChestSort();
@@ -67,10 +64,6 @@ public final class IntegrationManager {
 
         if (furnitureEngine != null) {
             furnitureEngine.unregisterListeners();
-        }
-
-        if (oraxen != null) {
-            oraxen.unregisterListeners();
         }
 
         if (placeholderAPI != null) {
@@ -110,10 +103,6 @@ public final class IntegrationManager {
         return towny;
     }
 
-    public GriefDefender getGriefDefender() {
-        return griefDefender;
-    }
-
     public FurnitureLib getFurnitureLib() {
         return furnitureLib;
     }
@@ -128,10 +117,6 @@ public final class IntegrationManager {
 
     public ItemsAdder getItemsAdder() {
         return itemsAdder;
-    }
-
-    public Oraxen getOraxen() {
-        return oraxen;
     }
 
     public MiniMessage getMiniMessage() {
@@ -174,10 +159,6 @@ public final class IntegrationManager {
         return towny != null;
     }
 
-    public boolean hasGriefDefender() {
-        return griefDefender != null;
-    }
-
     public boolean hasFurnitureLib() {
         return furnitureLib != null;
     }
@@ -194,9 +175,6 @@ public final class IntegrationManager {
         return itemsAdder != null;
     }
 
-    public boolean hasOraxen() {
-        return oraxen != null;
-    }
 
     public boolean hasMiniMessage() {
         return miniMessage != null;
@@ -332,22 +310,6 @@ public final class IntegrationManager {
         }
     }
 
-    private void loadGriefDefender() {
-        if (plugin.getConfig().getBoolean("settings.integration.griefdefender.enabled")) {
-            Plugin griefDefenderPlugin = plugin.getServer().getPluginManager().getPlugin("GriefDefender");
-
-            if (griefDefenderPlugin != null && griefDefenderPlugin.isEnabled()) {
-                griefDefender = new GriefDefender();
-
-                //griefDefender.registerFlag();
-
-                plugin.integrationMessage("Hooked into " + griefDefenderPlugin.getName() + " "
-                        + griefDefenderPlugin.getDescription().getVersion() + ".");
-            }
-        } else {
-            griefDefender = null;
-        }
-    }
 
     private void loadFurnitureLib() {
         if (plugin.getConfig().getBoolean("settings.integration.furniturelib.enabled")) {
@@ -414,21 +376,6 @@ public final class IntegrationManager {
             }
         } else {
             itemsAdder = null;
-        }
-    }
-
-    private void loadOraxen() {
-        if (plugin.getConfig().getBoolean("settings.integration.oraxen.enabled")) {
-            Plugin oraxenPlugin = plugin.getServer().getPluginManager().getPlugin("Oraxen");
-
-            if (oraxenPlugin != null && oraxenPlugin.isEnabled()) {
-                oraxen = new Oraxen(plugin, oraxenPlugin);
-
-                plugin.integrationMessage("Hooked into " + oraxenPlugin.getName() + " "
-                        + oraxenPlugin.getDescription().getVersion() + ".");
-            }
-        } else {
-            oraxen = null;
         }
     }
 
