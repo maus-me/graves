@@ -82,14 +82,14 @@ public final class CompatibilityMaterialData implements Compatibility {
                 skull.setOwner(grave.getOwnerName());
             } else {
                 if (!plugin.getVersionManager().is_v1_7()) {
-                    SkinUtil.setSkullBlockTexture(skull, grave.getOwnerName(), headBase64);
+                    //SkinUtil.setSkullBlockTexture(skull, grave.getOwnerName(), headBase64);
                 } else {
                     skull.setOwner(grave.getOwnerName());
                 }
             }
         } else if (headType == 1 && headBase64 != null && !headBase64.equals("")) {
             if (!plugin.getVersionManager().is_v1_7()) {
-                SkinUtil.setSkullBlockTexture(skull, grave.getOwnerName(), headBase64);
+                //SkinUtil.setSkullBlockTexture(skull, grave.getOwnerName(), headBase64);
             } else {
                 skull.setOwner(grave.getOwnerName());
             }

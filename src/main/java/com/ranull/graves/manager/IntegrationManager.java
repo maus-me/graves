@@ -42,7 +42,6 @@ public final class IntegrationManager {
         loadWorldEdit();
         loadWorldGuard();
         loadTowny();
-        //loadGriefDefender(); // TODO
         loadFurnitureLib();
         loadFurnitureEngine();
         loadProtectionLib();
@@ -53,7 +52,6 @@ public final class IntegrationManager {
         loadPlayerNPC();
         loadItemBridge();
         loadPlaceholderAPI();
-        //loadSkript(); // TODO
         loadCompatibilityWarnings();
     }
 

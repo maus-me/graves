@@ -142,11 +142,6 @@ public final class BlockManager {
             plugin.getIntegrationManager().getItemsAdder().removeBlock(location);
         }
 
-//        if (plugin.getIntegrationManager().hasOraxen() && plugin.getIntegrationManager().getOraxen()
-//                .isCustomBlock(location)) {
-//            plugin.getIntegrationManager().getOraxen().removeBlock(location);
-//        }
-
         if (location.getWorld() != null) {
             if (blockData.getReplaceMaterial() != null) {
                 Material material = Material.matchMaterial(blockData.getReplaceMaterial());
@@ -164,6 +159,7 @@ public final class BlockManager {
             }
 
             plugin.getDataManager().removeBlockData(location);
+
             plugin.debugMessage("Replacing grave block for " + blockData.getGraveUUID() + " at "
                     + location.getWorld().getName() + ", " + (location.getBlockX() + 0.5) + "x, "
                     + (location.getBlockY() + 0.5) + "y, " + (location.getBlockZ() + 0.5) + "z", 1);
