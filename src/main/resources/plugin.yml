@@ -35,31 +35,9 @@ commands:
     usage: /graves
     aliases:
       - grave
-      - tombstones
-      - tombstone
-      - deathchests
-      - deathchest
       - deaths
       - death
-      - tombs
-      - tomb
       - dc
-
-  graveyards:
-    description: Graveyards command
-    default: true
-    usage: /graveyards
-    aliases:
-      - graveyard
-      - cemeteries
-      - cemetery
-      - burialgrounds
-      - burialground
-      - churchyards
-      - churchyard
-      - necropolises
-      - necropolis
-      - gy
 
 permissions:
   graves.place:
@@ -129,10 +107,6 @@ permissions:
   graves.givetoken:
     default: op
     description: Give a grave token
-
-  graves.graveyard:
-    default: true
-    description: Graveyard menu
 
   graves.reload:
     default: op

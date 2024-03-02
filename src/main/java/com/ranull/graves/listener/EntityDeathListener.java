@@ -5,10 +5,8 @@ import com.ranull.graves.data.BlockData;
 import com.ranull.graves.event.GraveBlockPlaceEvent;
 import com.ranull.graves.event.GraveCreateEvent;
 import com.ranull.graves.type.Grave;
-import com.ranull.graves.type.Graveyard;
 import com.ranull.graves.util.*;
 import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -78,9 +76,6 @@ public class EntityDeathListener implements Listener {
         if (livingEntity instanceof Player) {
             Player player = (Player) livingEntity;
 
-            if (plugin.getGraveyardManager().isModifyingGraveyard(player)) {
-                plugin.getGraveyardManager().stopModifyingGraveyard(player);
-            }
 
             if (!player.hasPermission("graves.place")) {
                 plugin.debugMessage("Grave not created for " + entityName
@@ -370,36 +365,6 @@ public class EntityDeathListener implements Listener {
                 grave.getLocationDeath().setYaw(grave.getYaw());
                 grave.getLocationDeath().setPitch(grave.getPitch());
 
-                // Graveyard
-                if (plugin.getConfig("graveyard.enabled", grave).getBoolean("graveyard.enabled")) {
-                    Graveyard graveyard = plugin.getGraveyardManager()
-                            .getClosestGraveyard(grave.getLocationDeath(), livingEntity);
-
-                    if (graveyard != null) {
-                        Map<Location, BlockFace> graveyardFreeSpaces = plugin.getGraveyardManager()
-                                .getGraveyardFreeSpaces(graveyard);
-
-                        if (!graveyardFreeSpaces.isEmpty()) {
-                            if (plugin.getConfig("graveyard.death", grave).getBoolean("graveyard.death")) {
-                                locationMap.put(grave.getLocationDeath(), BlockData.BlockType.DEATH);
-                            }
-
-                            Map.Entry<Location, BlockFace> entry = graveyardFreeSpaces.entrySet().iterator().next();
-
-                            entry.getKey().setYaw(plugin.getConfig().getBoolean("settings.graveyard.facing")
-                                    ? BlockFaceUtil.getBlockFaceYaw(entry.getValue()) : grave.getYaw());
-                            entry.getKey().setPitch(grave.getPitch());
-                            locationMap.put(entry.getKey(), BlockData.BlockType.GRAVEYARD);
-                        } else {
-                            locationMap.put(grave.getLocationDeath(), BlockData.BlockType.DEATH);
-                        }
-                    } else {
-                        locationMap.put(grave.getLocationDeath(), BlockData.BlockType.DEATH);
-                    }
-                } else {
-                    locationMap.put(grave.getLocationDeath(), BlockData.BlockType.DEATH);
-                }
-
                 // Obituary
                 if (plugin.getConfig("obituary.enabled", grave).getBoolean("obituary.enabled")) {
                     graveItemStackList.add(plugin.getItemStackManager().getGraveObituary(grave));
@@ -452,12 +417,6 @@ public class EntityDeathListener implements Listener {
                                 offsetX = plugin.getConfig("placement.offset.x", grave).getInt("placement.offset.x");
                                 offsetY = plugin.getConfig("placement.offset.y", grave).getInt("placement.offset.y");
                                 offsetZ = plugin.getConfig("placement.offset.z", grave).getInt("placement.offset.z");
-
-                                break;
-                            case GRAVEYARD:
-                                offsetX = plugin.getConfig().getInt("settings.graveyard.offset.x");
-                                offsetY = plugin.getConfig().getInt("settings.graveyard.offset.y");
-                                offsetZ = plugin.getConfig().getInt("settings.graveyard.offset.z");
 
                                 break;
                         }

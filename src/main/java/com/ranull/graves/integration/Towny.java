@@ -19,7 +19,6 @@ public final class Towny {
     private final Plugin townyPlugin;
     private final TownyAPI townyAPI;
     private final TownBlockTypeRegisterListener townBlockTypeRegisterListener;
-    private TownBlockType graveyardBlockType;
 
     public Towny(Graves plugin, Plugin townyPlugin) {
         this.plugin = plugin;
@@ -27,31 +26,11 @@ public final class Towny {
         this.townyAPI = TownyAPI.getInstance();
         this.townBlockTypeRegisterListener = new TownBlockTypeRegisterListener(this);
 
-        reload();
-        registerGraveyardBlockType();
         registerListeners();
     }
 
     public boolean isEnabled() {
         return townyPlugin.isEnabled();
-    }
-
-    public void reload() {
-        graveyardBlockType = new TownBlockType("Graveyard", new TownBlockData() {
-            public double getTax(Town town) {
-                return plugin.getConfig().getDouble("settings.graveyard.towny.tax") + town.getPlotTax();
-            }
-        });
-    }
-
-    public void registerGraveyardBlockType() {
-        if (!TownBlockTypeHandler.exists(graveyardBlockType.getName().toLowerCase())) {
-            registerType(graveyardBlockType);
-        }
-    }
-
-    public TownBlockType getGraveyardBlockType() {
-        return graveyardBlockType;
     }
 
     public void registerListeners() {
@@ -83,11 +62,6 @@ public final class Towny {
         return false;
     }
 
-    public TownBlock getGraveyardTownBlock(Location location) {
-        TownBlock townBlock = townyAPI.getTownBlock(location);
-
-        return townBlock != null && townBlock.getType() == graveyardBlockType ? townBlock : null;
-    }
 
     public boolean hasTownPlot(Player player, String name) {
         return !getTownPlotsByName(player, name).isEmpty();
@@ -129,9 +103,4 @@ public final class Towny {
         return townBlock != null && townBlock.getName().equals(name);
     }
 
-    public boolean isLocationGraveyardBlockType(Location location) {
-        TownBlock townBlock = townyAPI.getTownBlock(location);
-
-        return townBlock != null && townBlock.getType() == graveyardBlockType;
-    }
 }

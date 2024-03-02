@@ -19,9 +19,5 @@ public class PlayerQuitListener implements Listener {
         Player player = event.getPlayer();
 
         plugin.getLocationManager().removeLastSolidLocation(player);
-
-        if (plugin.getGraveyardManager().isModifyingGraveyard(player)) {
-            plugin.getGraveyardManager().stopModifyingGraveyard(player);
-        }
     }
 }

@@ -2,7 +2,6 @@ package com.ranull.graves;
 
 import com.google.common.base.Charsets;
 import com.ranull.graves.command.GravesCommand;
-import com.ranull.graves.command.GraveyardsCommand;
 import com.ranull.graves.compatibility.Compatibility;
 import com.ranull.graves.compatibility.CompatibilityBlockData;
 import com.ranull.graves.compatibility.CompatibilityMaterialData;
@@ -27,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.Callable;
 
 public class Graves extends JavaPlugin {
     private VersionManager versionManager;
@@ -44,7 +42,6 @@ public class Graves extends JavaPlugin {
     private RecipeManager recipeManager;
     private LocationManager locationManager;
     private GraveManager graveManager;
-    private GraveyardManager graveyardManager;
     private Compatibility compatibility;
     private FileConfiguration fileConfiguration;
 
@@ -73,7 +70,6 @@ public class Graves extends JavaPlugin {
         entityManager = new EntityManager(this);
         locationManager = new LocationManager(this);
         graveManager = new GraveManager(this);
-        graveyardManager = new GraveyardManager(this);
 
         registerCommands();
         registerListeners();
@@ -91,7 +87,6 @@ public class Graves extends JavaPlugin {
     public void onDisable() {
         dataManager.closeConnection();
         graveManager.unload();
-        graveyardManager.unload();
         integrationManager.unload();
 
         if (recipeManager != null) {
@@ -209,7 +204,6 @@ public class Graves extends JavaPlugin {
 
     private void registerCommands() {
         PluginCommand gravesPluginCommand = getCommand("graves");
-        PluginCommand graveyardsPluginCommand = getCommand("graveyards");
 
         if (gravesPluginCommand != null) {
             GravesCommand gravesCommand = new GravesCommand(this);
@@ -218,12 +212,6 @@ public class Graves extends JavaPlugin {
             gravesPluginCommand.setTabCompleter(gravesCommand);
         }
 
-        if (graveyardsPluginCommand != null) {
-            GraveyardsCommand graveyardsCommand = new GraveyardsCommand(this);
-
-            graveyardsPluginCommand.setExecutor(graveyardsCommand);
-            graveyardsPluginCommand.setTabCompleter(graveyardsCommand);
-        }
     }
 
     public void debugMessage(String string, int level) {
@@ -392,9 +380,6 @@ public class Graves extends JavaPlugin {
         return graveManager;
     }
 
-    public GraveyardManager getGraveyardManager() {
-        return graveyardManager;
-    }
 
     public HologramManager getHologramManager() {
         return hologramManager;

@@ -105,13 +105,6 @@ settings:
           protected: "&c✘"
           unprotected: "&a✔"
 
-      #############
-      # Graveyard #
-      #############
-      graveyard:
-        enabled: true # Enable the graveyard feature.
-        death: false # If a suitable graveyard is found, should we still spawn the grave where the entity died.
-
       ############
       # Teleport #
       ############
@@ -120,7 +113,7 @@ settings:
         enabled: true # Can the entity teleport to their grave from the Graves GUI.
         cost: 5 # How much it costs to teleport to a grave, you need Vault for this.
         cost-different-world: 20 # Extra cost added on top of cost if the grave is in a different world.
-        cost-distance-increase: true # Increase the price the further away the grave is.
+        cost-distance-increase: false # Increase the price the further away the grave is.
         unsafe: false # Should entities be allowed to always teleport to a grave even if unsafe.
         top: true # If the grave is in an unsafe location, should the entity be teleported to the top.
 
@@ -621,17 +614,3 @@ settings:
               #  model-data: -1
               #  lore:
               #    - "Toggle grave protection"
-
-          graveyard:
-            title: "Graveyards"
-            slot:
-              0:
-                material: "PAPER"
-                function: "distance"
-                name: "Information"
-                glow: false
-                model-data: -1
-                lore:
-                  - "Items: &f%item%"
-                  - "Levels: &f%level%"
-                  - "Death Location: &f%world_formatted%, %x%x, %y%y, %z%z"

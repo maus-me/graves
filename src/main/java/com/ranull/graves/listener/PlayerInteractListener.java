@@ -2,10 +2,8 @@ package com.ranull.graves.listener;
 
 import com.ranull.graves.Graves;
 import com.ranull.graves.type.Grave;
-import com.ranull.graves.type.Graveyard;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -51,41 +49,6 @@ public class PlayerInteractListener implements Listener {
                 if (grave != null) {
                     event.setCancelled(plugin.getGraveManager().openGrave(player, block.getLocation(), grave));
                 }
-            }
-
-            // Graveyard
-            if (event.getClickedBlock() != null && event.getItem() != null
-                    && event.getItem().getType() == Material.BONE
-                    && plugin.getGraveyardManager().isModifyingGraveyard(player)) {
-                Graveyard graveyard = plugin.getGraveyardManager().getModifyingGraveyard(player);
-                Block block = event.getClickedBlock();
-                Location location = block.getLocation().clone();
-                Location locationRelative = block.getRelative(event.getBlockFace()).getLocation().clone();
-
-                /*
-                location.setPitch(player.getLocation().getPitch());
-                location.setYaw(player.getLocation().getYaw());
-                locationRelative.setPitch(location.getPitch());
-                locationRelative.setYaw(location.getYaw());
-                 */
-
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    if (graveyard.hasGraveLocation(location)) {
-                        plugin.getGraveyardManager().removeLocationInGraveyard(player, location, graveyard);
-                    } else if (graveyard.hasGraveLocation(locationRelative)) {
-                        plugin.getGraveyardManager().removeLocationInGraveyard(player, locationRelative, graveyard);
-                    } else {
-                        if (plugin.getGraveyardManager().isLocationInGraveyard(locationRelative, graveyard)) {
-                            plugin.getGraveyardManager().addLocationInGraveyard(player, locationRelative, graveyard);
-                        } else {
-                            player.sendMessage("outside graveyard " + graveyard.getName());
-                        }
-                    }
-                } else {
-                    player.sendMessage("can't break while modifying a graveyard");
-                }
-
-                event.setCancelled(true);
             }
 
             // Compass
